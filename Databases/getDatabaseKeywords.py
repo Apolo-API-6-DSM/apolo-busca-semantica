@@ -1,6 +1,19 @@
 from keywordGenerator import keywordGenerator
+from Databases.mongoConection import conectarMongo
+from pymongo import MongoClient
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
-def getDatabaseKeywords():
+def getDatabaseKeywordsMongo():
+    db = conectarMongo()
+
+    colecao = db['keywords']
+
+    keywords = colecao.find()
+    return keywords
+
+def getDatabaseKeywordsMock():
     textos = [
         "Solicitante Angelo Chaves Solicito a liberação da obra 95 nos logins das colaboradas Lara Pietra e Jessica Jenifer.",
         "Solicitante Monitoramento Foi verificado através do monitoramento que o switch T0849 se encontra offline desde dia 09032023 às 1811hrs",
