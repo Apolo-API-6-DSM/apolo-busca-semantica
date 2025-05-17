@@ -1,3 +1,4 @@
-from .getDatabaseKeywords import getDatabaseKeywords
+from .getDatabaseKeywords import getDatabaseKeywordsMongo, getDatabaseKeywordsMock
+from .mongoConection import conectarMongo
 
-__all__ = ["getDatabaseKeywords"]
+__all__ = ["getDatabaseKeywordsMongo", "getDatabaseKeywordsMock","conectarMongo"]

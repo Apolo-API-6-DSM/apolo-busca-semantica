@@ -14,7 +14,8 @@ def cleanStopWords(texto):
     texto = tokenizer.tokenize(texto)
 
     texto_tratado = []
-    stop_words = nltk.corpus.stopwords.words('portuguese') + ["person"]
+    #stop_words = nltk.corpus.stopwords.words('portuguese') + ["person"]
+    stop_words = ["person"]
     for palavra in texto:
         if(palavra in stop_words):
             continue

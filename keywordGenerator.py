@@ -7,9 +7,9 @@ texto = "Solicitante Thaylla Paiva Instalar 2 novos computadores na mesa do plan
 def keywordGenerator(texto):
     texto = preProcessamento(texto)
     kw_model = KeyBERT(model='all-MiniLM-L6-v2')
-    keywords = kw_model.extract_keywords(texto, top_n=5)
+    keywords = kw_model.extract_keywords(texto, top_n=3, keyphrase_ngram_range=(1, 2), use_maxsum=True, nr_candidates=20)
     keywords = [keyword for keyword, score in keywords]
-    model = SentenceTransformer("paraphrase-MiniLM-L3-v2")
+    model = SentenceTransformer("all-MiniLM-L6-v2")
     embeddings = []
     for kw in keywords:
         embeddings.append(model.encode(kw).tolist())
