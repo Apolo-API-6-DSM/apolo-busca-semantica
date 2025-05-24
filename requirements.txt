@@ -1,0 +1,7 @@
+flask
+keybert
+sentence-transformers
+scikit-learn
+numpy
+pymongo
+python-dotenv
