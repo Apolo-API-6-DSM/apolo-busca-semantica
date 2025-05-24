@@ -1,16 +1,17 @@
 from keybert import KeyBERT
 from sentence_transformers import SentenceTransformer
+from PreProcessamento.preProcessamento import preProcessamento
 
-modelo = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
+modelo = SentenceTransformer('all-MiniLM-L6-v2')
 kw_model = KeyBERT(model=modelo)
 
 def extrair_keywords_com_embeddings(texto: str, top_n: int = 5):
     if not texto.strip():
         return []
-
+    texto = preProcessamento(texto)
     keywords = kw_model.extract_keywords(
         texto,
-        keyphrase_ngram_range=(1, 1),
+        keyphrase_ngram_range=(1, 2),
         stop_words=None,
         top_n=top_n
     )
@@ -24,3 +25,5 @@ def extrair_keywords_com_embeddings(texto: str, top_n: int = 5):
         })
 
     return resultados
+
+
