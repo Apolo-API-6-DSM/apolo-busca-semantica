@@ -4,7 +4,7 @@ import psycopg2
 
 load_dotenv()
 
-def connectionWithoutCommit(func):
+def connectionWithoutCommitKeywords(func, keywords, limit, offset):
     try:
         conn = psycopg2.connect(
             dbname=os.getenv("DB_NAME"),
@@ -16,7 +16,7 @@ def connectionWithoutCommit(func):
         cursor = conn.cursor()
 
         # Executa a função e captura retorno (se houver)
-        result = func(cursor)
+        result = func(cursor, keywords, limit, offset)
 
         conn.commit()  # só se tiver inserts/updates, senão pode tirar
         return result
