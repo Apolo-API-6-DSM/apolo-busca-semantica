@@ -1,5 +1,7 @@
 import os
 import pprint
+import traceback
+from flask_cors import CORS
 import requests
 from flask import Flask, request, jsonify
 from pymongo import MongoClient
@@ -16,6 +18,9 @@ redis_client = redis.Redis(host='localhost', port=6379, db=0, decode_responses=T
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)  # Libera CORS só para seu front local
+
+
 
 NESTJS_BASE_URL = "http://localhost:3003"
 MONGO_URI = os.getenv("MONGO_URI")
@@ -99,7 +104,7 @@ def comparar_similaridade():
     data = request.get_json()
     if not data or 'prompt' not in data:
         return jsonify({'error': 'Campo "prompt" é obrigatório.'}), 400
-
+    print(data)
     prompt = data['prompt']
     token = data.get('token')
 
@@ -128,7 +133,10 @@ def comparar_similaridade():
         })
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({
+            'error': str(e),
+            'trace': traceback.format_exc()
+        }), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8081)

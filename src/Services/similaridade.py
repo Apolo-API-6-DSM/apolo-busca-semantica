@@ -32,6 +32,7 @@ def similarityComparison(prompt):
     resultados_ordenados = sorted(resultados, key=lambda x: x["score"], reverse=True)
     top_resultados = [r for r in resultados_ordenados if r["score"] >= 0.5][:5]
     keywords = [item["keyword"] for item in top_resultados]
+    print(keywords)
     return keywords
 
 
